@@ -15,7 +15,8 @@ public class Cliente extends Usuario {
 		super();
 	}
 
-	public Cliente(String nombre, LocalDate fechaNacimiento, int run, String telefono, String afp, int sistemaSalud, String direccion, String comuna, int edad) {
+	public Cliente(String nombre, LocalDate fechaNacimiento, int run, String telefono, String afp, int sistemaSalud,
+			String direccion, String comuna, int edad) {
 		super(nombre, fechaNacimiento, run);
 		this.telefono = telefono;
 		this.afp = afp;
@@ -76,12 +77,8 @@ public class Cliente extends Usuario {
 	@Override
 	public void analizarUsuario() {
 		super.analizarUsuario();
-		System.out.println("Teléfono: " + telefono);
-		System.out.println("AFP: " + afp);
-		System.out.println("Sistema de Salud: " + sistemaSalud);
 		System.out.println("Dirección: " + direccion);
 		System.out.println("Comuna: " + comuna);
-		System.out.println("Edad: " + edad);
 	}
 
 	@Override
@@ -89,11 +86,11 @@ public class Cliente extends Usuario {
 		return "Cliente telefono: " + telefono + ", afp: " + afp + ", sistemaSalud: " + sistemaSalud + ", direccion: "
 				+ direccion + ", comuna: " + comuna + ", edad: " + edad;
 	}
-	
+
 	public String obtenerNombre() {
 		return "El cliente se llama" + getNombre();
 	}
-	
+
 	public String obtenerSistemaSalud() {
 		if (sistemaSalud == 1) {
 			return "Fonasa";

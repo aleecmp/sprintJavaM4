@@ -1,14 +1,16 @@
 package cl.awakelab.sprintfinalm4;
 
-import java.util.Date;
+
 import java.text.SimpleDateFormat;
+
+import java.time.LocalTime;
 
 public class Capacitacion {
 
 	private int identificador;
 	private int rutCliente;
-	private Date dia;
-	private String hora;
+	private String dia;
+	private LocalTime hora;
 	private String lugar;
 	private int duracion;
 	private int cantidadAsistentes;
@@ -17,7 +19,7 @@ public class Capacitacion {
 
 	}
 
-	public Capacitacion(int identificador, int rutCliente, Date dia, String hora, String lugar, int duracion,
+	public Capacitacion(int identificador, int rutCliente, String dia, LocalTime hora, String lugar, int duracion,
 			int cantidadAsistentes) {
 		this.identificador = identificador;
 		this.rutCliente = rutCliente;
@@ -44,19 +46,19 @@ public class Capacitacion {
 		this.rutCliente = rutCliente;
 	}
 
-	public Date getDia() {
+	public String getDia() {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 

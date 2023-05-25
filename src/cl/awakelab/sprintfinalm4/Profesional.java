@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Profesional extends Usuario {
 	private String titulo;
-	private String fechaIngreso;
+	private LocalDate fechaIngreso;
 
 	public Profesional() {
 		super();
 	}
 
-	public Profesional(String nombre, LocalDate fechaNacimiento, int run, String titulo, String fechaIngreso) {
+	public Profesional(String nombre, LocalDate fechaNacimiento, int run, String titulo, LocalDate fechaIngreso) {
 		super(nombre, fechaNacimiento, run);
 		this.titulo = titulo;
 		this.fechaIngreso = fechaIngreso;
@@ -24,11 +24,11 @@ public class Profesional extends Usuario {
 		this.titulo = titulo;
 	}
 
-	public String getFechaIngreso() {
+	public LocalDate getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(String fechaIngreso) {
+	public void setFechaIngreso(LocalDate fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 

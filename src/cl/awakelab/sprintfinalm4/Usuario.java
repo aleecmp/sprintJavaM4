@@ -1,7 +1,6 @@
 package cl.awakelab.sprintfinalm4;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Usuario implements IAsesoria {
 
@@ -9,8 +8,6 @@ public class Usuario implements IAsesoria {
 	private LocalDate fechaNacimiento;
 	private int run;
 
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	String fechaFormato = formatter.format(fechaNacimiento);
 
 	// Constructor sin parámetros
 	public Usuario() {
