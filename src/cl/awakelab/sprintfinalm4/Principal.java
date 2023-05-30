@@ -1,17 +1,37 @@
 package cl.awakelab.sprintfinalm4;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Clase Principal para ejecutar la aplicación.
+ * 
+ * @author Alexis Campusano
+ * @author Fernanda Fajre
+ * @author Christopher Figueroa
+ * @author Carlos Torres
+ * @version 1.0
+ *
+ */
+
 public class Principal {
 
+	/**
+	 * Metodo main que ejecuta un menu de opciones a realizar. Almacenar un usuario
+	 * cliente en el sistema, almacenar un usuario profesional en el sistema,
+	 * almacenar un usuario administrativo en el sistema, almacenar una
+	 * capacitación, eliminar un usuario, listar los usuarios ingresados, listar los
+	 * usuarios inrgesados por tipo (cliente, profesional o administrativo), listar
+	 * las capacitaciones ingresadas o salir del programa.
+	 *
+	 * @param args Argumentos de la línea de comandos. No se utilizan para esta
+	 *             aplicación.
+	 */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String patron = "HH:mm";
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern(patron);
+
+		DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
 
 		Contenedor contenedor = new Contenedor();
 
@@ -34,6 +54,7 @@ public class Principal {
 			sc.nextLine();
 
 			switch (opcion) {
+			// Almacenar Cliente
 			case 1: {
 				Cliente cliente = new Cliente();
 				System.out.println("Ingrese el nombre del cliente:");
@@ -51,8 +72,8 @@ public class Principal {
 					System.out.println("Este campo no puede estar vacío, ingrese una fecha válida:");
 					fechaNacimiento = sc.nextLine();
 				}
-				LocalDate fechaNacimientoFormat = LocalDate.parse(fechaNacimiento, formatter);
-				cliente.setFechaNacimiento(fechaNacimientoFormat);
+
+				cliente.setFechaNacimiento(fechaNacimiento);
 
 				System.out.println("Ingrese el run del cliente: ");
 				int run = sc.nextInt();
@@ -128,9 +149,10 @@ public class Principal {
 				contenedor.almacenarCliente(cliente);
 				break;
 			}
+			// Almacenar Profesional
 			case 2: {
 				Profesional profesional = new Profesional();
-				
+
 				System.out.println("Ingrese el nombre del profesional:");
 				String nombre = sc.nextLine();
 				while (nombre.length() < 10 || nombre.length() > 50 || nombre == null) {
@@ -145,13 +167,12 @@ public class Principal {
 					System.out.println("Este campo no puede estar vacío, ingrese una fecha válida:");
 					fechaNacimiento = sc.nextLine();
 				}
-				LocalDate fechaNacimientoFormat = LocalDate.parse(fechaNacimiento, formatter);
-				profesional.setFechaNacimiento(fechaNacimientoFormat);
+				profesional.setFechaNacimiento(fechaNacimiento);
 
 				System.out.println("Ingrese el run del cliente: ");
 				int run = sc.nextInt();
 				sc.nextLine();
-				while (run < 99999999) {
+				while (run > 99999999) {
 					System.out.println("El run ingresado debe ser menor a 99999999");
 					run = sc.nextInt();
 					sc.nextLine();
@@ -172,13 +193,12 @@ public class Principal {
 					System.out.println("Este campo no puede estar vacío, ingrese una fecha válida:");
 					fechaIngreso = sc.nextLine();
 				}
-				LocalDate fechaIngresoFormat = LocalDate.parse(fechaIngreso, formatter);
-				profesional.setFechaIngreso(fechaIngresoFormat);
+				profesional.setFechaIngreso(fechaIngreso);
 
 				contenedor.almacenarProfesional(profesional);
-
 				break;
 			}
+			// Almacenar Administrativo
 			case 3: {
 				Administrativo administrativo = new Administrativo();
 
@@ -197,9 +217,17 @@ public class Principal {
 					System.out.println("Este campo no puede estar vacío, ingrese una fecha válida: ");
 					fechaNacimiento = sc.nextLine();
 				}
-				LocalDate fechaNacimientoFormat = LocalDate.parse(fechaNacimiento, formatter);
-				administrativo.setFechaNacimiento(fechaNacimientoFormat);
+				administrativo.setFechaNacimiento(fechaNacimiento);
 
+				System.out.println("Ingrese el run del cliente: ");
+				int run = sc.nextInt();
+				sc.nextLine();
+				while (run > 99999999) {
+					System.out.println("El run ingresado debe ser menor a 99999999");
+					run = sc.nextInt();
+					sc.nextLine();
+				}
+				administrativo.setRun(run);
 				System.out.println("Ingrese el area del adiministrativo: ");
 				String area = sc.nextLine();
 				while (area.length() < 5 || area.length() > 30 || area == null) {
@@ -208,9 +236,18 @@ public class Principal {
 				}
 				administrativo.setArea(area);
 
+				System.out.println("Ingrese el experiencia previa del adiministrativo: ");
+				String experienciaPrevia = sc.nextLine();
+				while (experienciaPrevia == null) {
+					System.out.println("Este campo no puede estar vacío, ingrese experiencia previa: ");
+					experienciaPrevia = sc.nextLine();
+				}
+				administrativo.setExperienciaPrevia(experienciaPrevia);
+
 				contenedor.almacenarAdministrativo(administrativo);
 				break;
 			}
+			// Almacenar Capacitación
 			case 4: {
 				Capacitacion capacitacion = new Capacitacion();
 
@@ -259,7 +296,7 @@ public class Principal {
 					System.out.println("Este campo no puede estar vacío, ingrese una hora válida:");
 					hora = sc.nextLine();
 				}
-				LocalTime horaFormat = LocalTime.parse(hora, formato);
+				LocalTime horaFormat = LocalTime.parse(hora, formatoHora);
 				capacitacion.setHora(horaFormat);
 
 				System.out.println("Ingrese el nombre del lugar de la capacitación: ");
@@ -288,26 +325,26 @@ public class Principal {
 				capacitacion.setCantidadAsistentes(cantidadAsistentes);
 				contenedor.almacenarCapacitacion(capacitacion);
 				break;
-
 			}
-
+			// Eliminar Usuario
 			case 5: {
 				System.out.println("Ingrese el run del usuario a eliminar");
 				int run = sc.nextInt();
 				sc.nextLine();
-				while (run < 99999999) {
+				while (run > 99999999) {
 					System.out.println("El run ingresado debe ser menor a 99999999");
 					run = sc.nextInt();
 					sc.nextLine();
 				}
-
 				contenedor.eliminarUsuario(run);
 				break;
 			}
+			// Listar Usuarios
 			case 6: {
 				contenedor.listarUsuarios();
 				break;
 			}
+			// Listar Usuarios por tipo
 			case 7: {
 				System.out.println(
 						"Ingrese el tipo de usuario a listar (1: Cliente, 2: Profesional, 3: Administrativo):");
@@ -338,11 +375,12 @@ public class Principal {
 				break;
 
 			}
+			// Listar Capacitaciones
 			case 8: {
 				contenedor.listarCapacitaciones();
 				break;
 			}
-
+			// Salir del programa
 			case 9: {
 				System.out.println("Saliendo del programa");
 				break;
